@@ -1,0 +1,7 @@
+apiVersion: v2
+
+type: application
+
+name: app-front
+
+version: 0.1.0

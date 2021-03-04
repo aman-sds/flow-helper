@@ -1,0 +1,81 @@
+variables:
+  IMAGE: $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
+
+stages:
+  - Prebuild
+  - Build
+  - Deploy
+
+YARN:
+  image: node:12
+  stage: Prebuild
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    expire_in: 1h
+    paths:
+      - dist_client/
+      - dist_server/
+      - build/
+  script:
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+    - yarn
+    - yarn compile
+
+Docker:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: ['']
+  stage: Build
+  dependencies:
+    - YARN
+  before_script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+  script:
+    - /kaniko/executor --cache --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/.deploy/Dockerfile --destination $IMAGE
+
+.Deploy:
+  image:
+    name: alpine/helm:3.0.1
+    entrypoint: ['/bin/sh', '-c']
+  stage: Deploy
+  dependencies: []
+  needs:
+    - Docker
+  variables:
+    CHART: app-front
+  before_script:
+    - mkdir -p ~/.kube/
+    - echo $K8S_CONFIG > ~/.kube/config
+  script:
+    - helm --debug upgrade -i $CHART .deploy/$CHART -n $NS --set="image=$IMAGE,env=$ENV" --wait
+    - helm --debug status $CHART -n $NS
+
+Deploy Dev:
+  extends: .Deploy
+  variables:
+    NS: act-dev
+    K8S_CONFIG: $K8S_CONFIG_TEST
+    ENV: development
+  only:
+    refs:
+      - dev
+
+Deploy Staging:
+  extends: .Deploy
+  variables:
+    NS: act-stg
+    K8S_CONFIG: $K8S_CONFIG_TEST
+    ENV: development
+  when: manual
+
+Deploy QA:
+  extends: .Deploy
+  variables:
+    NS: act-qa
+    K8S_CONFIG: $K8S_CONFIG_TEST
+    ENV: development
+  when: manual

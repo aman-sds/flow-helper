@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-front
+  labels:
+    app: app-front
+spec:
+  minReadySeconds: 15
+  selector:
+    matchLabels:
+      app: app-front
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: app-front
+      annotations:
+        # Hack to force images with same tag to redeploy
+        deployedAt: {{ now | unixEpoch | quote }}
+    spec:
+      containers:
+        - image: {{ required "Variable 'image' is required" .Values.image }}
+          imagePullPolicy: Always
+          name: app-front
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+          {{- if ne .Values.env "production" }}
+          resources:
+            limits:
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 20m
+              memory: 25Mi
+          {{- end }}
+      imagePullSecrets:
+        - name: reg-app-front

@@ -1,0 +1,240 @@
+@import '../abstracts/variables';
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+//COLORS
+.color-orange {
+  color: $color-orange !important;
+}
+
+.color-blue {
+  color: $color-blue !important;
+}
+
+.color-whiteDark {
+  color: $color-whiteDark !important;
+}
+
+.color-grayLight {
+  color: $color-grayLight !important;
+}
+
+.color-gray {
+  color: $color-gray !important;
+}
+
+.color-grayDark {
+  color: $color-grayDark !important;
+}
+
+.color-black {
+  color: $color-black !important;
+}
+
+.color-blackLight {
+  color: $color-blackLight !important;
+}
+
+//FONTS
+.font-weight {
+  &-default {
+    font-weight: normal;
+  }
+  &-4 {
+    font-weight: 400;
+  }
+  &-5 {
+    font-weight: 500;
+  }
+  &-6 {
+    font-weight: 600;
+  }
+  &-7 {
+    font-weight: 700;
+  }
+  &-8 {
+    font-weight: 800;
+  }
+  &-9 {
+    font-weight: 900;
+  }
+}
+
+.fs {
+  font-size: 12px;
+  &-xxs {
+    font-size: $fontSize-xxs !important;
+  }
+  &-xs {
+    font-size: $fontSize-xs !important;
+  }
+  &-sm {
+    font-size: $fontSize-sm !important;
+  }
+  &-md {
+    font-size: $fontSize-md !important;
+  }
+  &-lg {
+    font-size: $fontSize-lg !important;
+  }
+  &-xlg {
+    font-size: $fontSize-xlg !important;
+  }
+}
+
+@mixin spacerBuilder($property) {
+  &-0 {
+    #{$property}: $spacer-0 !important;
+  }
+  &-1 {
+    #{$property}: $spacer-1 !important;
+  }
+  &-2 {
+    #{$property}: $spacer-2 !important;
+  }
+  &-3 {
+    #{$property}: $spacer-3 !important;
+  }
+  &-4 {
+    #{$property}: $spacer-4 !important;
+  }
+  &-5 {
+    #{$property}: $spacer-5 !important;
+  }
+  &-6 {
+    #{$property}: $spacer-6 !important;
+  }
+  &-7 {
+    #{$property}: $spacer-7 !important;
+  }
+  &-8 {
+    #{$property}: $spacer-8 !important;
+  }
+  &-9 {
+    #{$property}: $spacer-9 !important;
+  }
+  &-10 {
+    #{$property}: $spacer-10 !important;
+  }
+  &-11 {
+    #{$property}: $spacer-11 !important;
+  }
+}
+
+.m {
+  @include spacerBuilder(margin);
+}
+.mt {
+  @include spacerBuilder(margin-top);
+}
+
+.mr {
+  @include spacerBuilder(margin-right);
+}
+
+.mb {
+  @include spacerBuilder(margin-bottom);
+}
+
+.ml {
+  @include spacerBuilder(margin-left);
+}
+
+.p {
+  @include spacerBuilder(padding);
+}
+.pt {
+  @include spacerBuilder(padding-top);
+}
+
+.pr {
+  @include spacerBuilder(padding-right);
+}
+
+.pl {
+  @include spacerBuilder(padding-left);
+}
+
+.pb {
+  @include spacerBuilder(padding-bottom);
+}
+
+@media (max-width: 400px) {
+  .text-header {
+    width: 260px;
+  }
+}
+
+.box-shadowed {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+  &--interactive {
+    &:hover {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+.rounded {
+  background: $color-white;
+  border: 1px solid $color-whiteDark;
+  box-sizing: border-box;
+  border-radius: $border-radius-content;
+}
+
+@media (max-width: $screen-md) {
+  .rounded > .ant-card-body {
+    padding: $spacer-6;
+  }
+}
+
+.text {
+  font-family: $fontFamily-default;
+  font-size: $fontSize-md;
+  color: $color-gray;
+}
+
+.input:focus {
+  outline: none;
+  border: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.width-full {
+  width: 100%;
+}
+
+.width-max-full {
+  max-width: 100%;
+}
+
+.d-block {
+  display: block;
+}
+
+.t-align-c {
+  text-align: center;
+}
+
+.t-align-e {
+  text-align: end;
+}
+
+.t-align-s {
+  text-align: start;
+}
+
+.word-break {
+  word-break: break-word;
+}

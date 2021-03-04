@@ -1,0 +1,80 @@
+// Color variables
+$color-white: #ffffff;
+$color-whiteDark: #f4f4f4;
+$color-whiteDarkest: #ededed;
+$color-grayLightest: #d1d1d1;
+$color-grayLight: #adadad;
+$color-gray: #999999;
+$color-grayDark: #666666;
+$color-blackLight: #333333;
+$color-black: #1f1f1f;
+
+$color-orange: #ff4938;
+$color-orangeDark: #f03e2d;
+$color-green: #83d14f;
+$color-blue: #0289d6;
+
+$color-layout: #fbfbfb;
+$color-shadow: #00000026;
+
+// Screen size variables
+$screen-xs: 480px;
+$screen-sm: 576px;
+$screen-md-break: 767px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+$screen-xxl: 1600px;
+
+// Spaces
+$spacer: 8px;
+
+$spacer-0: $spacer * 0;
+$spacer-1: $spacer / 4;
+$spacer-2: $spacer / 2;
+$spacer-3: $spacer;
+$spacer-4: $spacer * 1.5;
+$spacer-5: $spacer * 2;
+$spacer-6: $spacer * 2.5;
+$spacer-7: $spacer * 3;
+$spacer-8: $spacer * 3.5;
+$spacer-9: $spacer * 4;
+$spacer-10: $spacer * 4.5;
+$spacer-11: $spacer * 5;
+
+// Font family variables
+$fontFamily-default: 'Roboto';
+$fontFamily-light: 'Roboto Light';
+$fontFamily-bold: 'Roboto Bold';
+
+// Font size variables
+$fontSize-xxxs: 12px;
+$fontSize-xxs: 14px;
+$fontSize-xs: 16px;
+$fontSize-sm: 18px;
+$fontSize-md: 20px;
+$fontSize-lg: 24px;
+$fontSize-xlg: 26px;
+$fontSize-xxlg: 36px;
+
+// Font weight
+$fontWeight-xxl: 900;
+
+// Modal window
+$modalWidth: 350px;
+
+// Border radius
+$border-radius: 6px;
+$border-radius-content: 8px;
+
+// Antd button height
+$button-large: 40px;
+
+// Header
+$logo-img-sm: 48px;
+$logo-img-xs: 32px;
+
+$logo-max-width-sm: 260px;
+$logo-max-width-xs: 170px;
+
+$header-height: 81px;
